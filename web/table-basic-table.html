@@ -1254,7 +1254,7 @@
 						<hr>
 						<div class="card">
 							<div class="card-body">
-								<table class="table table-sm mb-0">
+								<table id="row" class="table table-sm mb-0">
 									<thead>
 										<tr>
 											<th scope="col">#</th>
@@ -1527,7 +1527,73 @@
     </div>
   </div>
   <!--start switcher-->
-
+  <script>
+    // Define spreadsheet URL.
+     var mySpreadsheet = 'https://docs.google.com/spreadsheets/d/18m_KrJVmUYz8CmVSBtOPTYDl3V4IpQMkyWXdUfv_vfs/edit#gid=861105727';
+    
+    // Load top ten switch hitters.
+    $('#row').sheetrock({
+      url: mySpreadsheet,
+      query: ("select A,D,C,E"),
+    }).on('sheetrock:loaded', function () {
+      $(this).DataTable({
+        
+        responsive: true,
+        colReorder: true,
+        lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "ทั้งหมด"]],
+        order: [[0, "asc"], [1, "asc"], [2, "asc"]],
+        //sPaginationType: "full_numbers",
+        // กำหนดหัวคอลัมภ์โดยตั้งชื่อเอง
+        columns: [
+          { title: "ชื่อ สกุล" },
+          { title: "เพศ" },
+          { title: "อายุ" },
+          { title: "เดือนเกิด" },
+          { title: "กรุ๊ปเลือด" },
+          { title: "ระดับการศึกษา" },
+          { title: "ภูมิภาค" },
+          { title: "การใช้ Data Studio" },
+          { title: "รูปภาพ + Link",
+              render: function (data, type, row, meta) {
+                return '<a href="' + data + '" target="_blank"><img src="' + data + '" class="avatar" width="50" height="50"/></a>';
+              },
+            },
+          ],
+        language: {
+          sProcessing: "กำลังดำเนินการ...",
+          sLengthMenu: "แสดง_MENU_ แถว",
+          sZeroRecords: "ไม่พบข้อมูล",
+          sInfo: "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
+          sInfoEmpty: "แสดง 0 ถึง 0 จาก 0 แถว",
+          sInfoFiltered: "(กรองข้อมูล _MAX_ ทุกแถว)",
+          sInfoPostFix: "",
+          sSearch: "ค้นหา:",
+          sUrl: "",
+          oPaginate: {
+            sFirst: "หน้าแรก",
+            sPrevious: "ก่อนหน้า",
+            sNext: "ถัดไป",
+            sLast: "หน้าสุดท้าย"
+          }
+          
+        },
+    
+      }
+    
+    );
+    });
+    </script>
+    <style>
+      .data_table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    
+      font-weight: 100 ;
+      line-height: 1.6rem;
+      word-wrap: break-word;
+    } 
+    </style>
   <!--bootstrap js-->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
 
