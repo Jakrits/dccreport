@@ -1346,7 +1346,10 @@
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
-            <table id="example" class="table table-striped table-bordered" style="width:100%"></table>
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+             
+            </table>
+
           </div>
         </div>
       </div>
@@ -1563,12 +1566,10 @@
     // Load top ten switch hitters.
     $('#example').sheetrock({
       url: mySpreadsheet,
-      query: "select A,D,C,E order by A desc " ,
+      query: "select A,K,D,C,E order by A desc" ,
     }).on('sheetrock:loaded', function () {
       $(this).DataTable();
     });
-
-    
   </script>
 
     <!--plugins-->
